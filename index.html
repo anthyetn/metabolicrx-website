@@ -72,38 +72,93 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #f5f3f9 0%, #ede9f5 100%);
-            padding: 80px 40px;
-            text-align: center;
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(10, 8, 20, 0.82) 0%,
+                rgba(20, 15, 40, 0.65) 50%,
+                rgba(10, 8, 20, 0.25) 100%
+            );
+            z-index: 1;
         }
 
         .hero-content {
-            max-width: 900px;
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 100px 60px;
+            width: 100%;
+        }
+
+        .hero-text {
+            max-width: 580px;
         }
 
         .hero-tag {
-            color: #7b68a6;
-            font-size: 14px;
+            color: #c4b5e8;
+            font-size: 13px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-tag::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 2px;
+            background: #7b68a6;
         }
 
         h1 {
-            font-size: 56px;
-            line-height: 1.1;
+            font-size: 58px;
+            line-height: 1.08;
             margin-bottom: 24px;
-            color: #1a1a1a;
+            color: #ffffff;
             font-weight: 700;
+            letter-spacing: -1px;
         }
 
         .hero-subtitle {
-            font-size: 20px;
-            color: #4a4a4a;
-            margin-bottom: 40px;
-            line-height: 1.6;
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 44px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         .cta-button {
@@ -112,17 +167,58 @@
             padding: 18px 40px;
             border: none;
             border-radius: 12px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(123, 104, 166, 0.2);
+            box-shadow: 0 4px 20px rgba(123, 104, 166, 0.35);
         }
 
         .cta-button:hover {
             background: #634f8a;
             transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(123, 104, 166, 0.3);
+            box-shadow: 0 6px 30px rgba(123, 104, 166, 0.5);
+        }
+
+        .hero-secondary-btn {
+            background: rgba(255,255,255,0.12);
+            color: white;
+            padding: 18px 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
+        }
+
+        .hero-secondary-btn:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 56px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .hero-stat .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #c4b5e8;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .hero-stat .stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         /* Content Sections */
@@ -624,6 +720,19 @@
             .pricing-card.featured {
                 transform: scale(1);
             }
+
+            .hero-content {
+                padding: 80px 30px;
+            }
+
+            .hero-stats {
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -641,11 +750,32 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <img src="hero.png" alt="Doctor with happy healthy patients at Metabolic Rx" class="hero-image" />
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-tag">Testosterone Replacement Therapy</div>
-            <h1>Restore Your Vitality</h1>
-            <p class="hero-subtitle">Expert testosterone therapy for men experiencing low T. Feel energized, focused, and confident again with personalized treatment from licensed providers.</p>
-            <button class="cta-button">Start Your Free Consultation</button>
+            <div class="hero-text">
+                <div class="hero-tag">Testosterone Replacement Therapy</div>
+                <h1>Restore Your Vitality</h1>
+                <p class="hero-subtitle">Expert testosterone therapy for men experiencing low T. Feel energized, focused, and confident again with personalized treatment from licensed providers.</p>
+                <div class="hero-buttons">
+                    <button class="cta-button">Start Your Free Consultation</button>
+                    <button class="hero-secondary-btn">Learn More</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">5,000+</div>
+                        <div class="stat-label">Patients Treated</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -886,66 +1016,35 @@
         
         <div class="faq-container">
             <div class="faq-item">
-                <div class="faq-question">
-                    Who is a good candidate for testosterone therapy?
-                    <span>+</span>
-                </div>
+                <div class="faq-question">Who is a good candidate for testosterone therapy?<span>+</span></div>
                 <div class="faq-answer">Men who are experiencing symptoms of low testosterone and have confirmed low T levels through blood testing are typically good candidates. This usually includes men over 30 with testosterone levels below 300 ng/dL, though individual circumstances vary. Your provider will evaluate your complete health profile to determine if TRT is appropriate for you.</div>
             </div>
-
             <div class="faq-item">
-                <div class="faq-question">
-                    How quickly will I see results from TRT?
-                    <span>+</span>
-                </div>
+                <div class="faq-question">How quickly will I see results from TRT?<span>+</span></div>
                 <div class="faq-answer">Most men begin noticing improvements in energy, mood, and libido within 3-6 weeks of starting treatment. Physical changes like increased muscle mass and reduced body fat typically become noticeable within 3-6 months. Maximum benefits are usually achieved within 6-12 months of consistent treatment.</div>
             </div>
-
             <div class="faq-item">
-                <div class="faq-question">
-                    Is testosterone replacement therapy safe?
-                    <span>+</span>
-                </div>
+                <div class="faq-question">Is testosterone replacement therapy safe?<span>+</span></div>
                 <div class="faq-answer">When properly monitored by qualified healthcare providers, TRT is generally safe for most men. Your Metabolic Rx provider will conduct regular lab tests and check-ins to monitor your response and adjust treatment as needed. We carefully screen for contraindications and monitor for potential side effects to ensure your safety throughout treatment.</div>
             </div>
-
             <div class="faq-item">
-                <div class="faq-question">
-                    What are the potential side effects?
-                    <span>+</span>
-                </div>
+                <div class="faq-question">What are the potential side effects?<span>+</span></div>
                 <div class="faq-answer">Possible side effects may include acne, fluid retention, increased red blood cell count, breast enlargement, testicular shrinkage, and decreased sperm production. However, many of these can be managed or prevented with proper monitoring and dose adjustments. Your provider will discuss all potential risks and benefits during your consultation.</div>
             </div>
-
             <div class="faq-item">
-                <div class="faq-question">
-                    Do I need to be on TRT forever?
-                    <span>+</span>
-                </div>
+                <div class="faq-question">Do I need to be on TRT forever?<span>+</span></div>
                 <div class="faq-answer">The duration of TRT varies by individual. Some men choose to continue indefinitely to maintain benefits, while others may use it for a specific period. If you stop treatment, your testosterone levels will gradually return to their pre-treatment baseline. Your provider will help you make informed decisions about the duration of your treatment based on your goals and response.</div>
             </div>
-
             <div class="faq-item">
-                <div class="faq-question">
-                    Will TRT affect my fertility?
-                    <span>+</span>
-                </div>
+                <div class="faq-question">Will TRT affect my fertility?<span>+</span></div>
                 <div class="faq-answer">TRT can reduce sperm production and may affect fertility while you're taking it. If you're planning to have children, discuss this with your provider before starting treatment. Alternative therapies or protocols that preserve fertility may be available. In many cases, fertility returns after discontinuing TRT, though this isn't guaranteed.</div>
             </div>
-
             <div class="faq-item">
-                <div class="faq-question">
-                    How often will I need lab work?
-                    <span>+</span>
-                </div>
+                <div class="faq-question">How often will I need lab work?<span>+</span></div>
                 <div class="faq-answer">Initially, we typically check your levels after 6-8 weeks to ensure your dosage is optimized. Once stabilized, we recommend lab work every 3-6 months to monitor testosterone levels, red blood cell count, estradiol, and other important markers. Regular monitoring ensures both safety and effectiveness of your treatment.</div>
             </div>
-
             <div class="faq-item">
-                <div class="faq-question">
-                    Can I use insurance for TRT through Metabolic Rx?
-                    <span>+</span>
-                </div>
+                <div class="faq-question">Can I use insurance for TRT through Metabolic Rx?<span>+</span></div>
                 <div class="faq-answer">We operate on a cash-pay model without accepting insurance. This allows us to offer transparent pricing, faster service, and more personalized care without insurance restrictions. Many patients find our pricing competitive with or better than their insurance co-pays and deductibles. You may be able to submit receipts to your insurance for potential reimbursement.</div>
             </div>
         </div>
@@ -987,7 +1086,6 @@
                     <a href="tel:+19097872342" class="footer-link">(909) 787-2342</a>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <p>Metabolic Rx is a patient management platform that provides administrative and operational support to physicians and practitioners who deliver care through a telehealth platform. Payment does not guarantee the prescribing or dispensing of medication.</p>
                 <p style="margin-top: 20px;">© 2025 Metabolic Rx</p>
